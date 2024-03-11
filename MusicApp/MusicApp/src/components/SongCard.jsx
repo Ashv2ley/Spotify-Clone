@@ -5,12 +5,14 @@ import { playPause, setActiveSong } from "../redux/features/playerSlice";
 import {act} from "react-dom/test-utils";
 
 const SongCard = ({song, i, isPlaying, activeSong, data}) => {
+    const dispatch = useDispatch()
     const handlePauseClick = () => {
-
+        dispatch(playPause(false))
     }
 
     const handlePlayClick = () => {
-
+        dispatch(setActiveSong({song, data, i}))
+        dispatch(playPause(true))
     }
 
     return (
@@ -18,6 +20,7 @@ const SongCard = ({song, i, isPlaying, activeSong, data}) => {
           <div className={"relative w-full h-56 group"}>
               <div className={`absolute bottom-4 right-2 transition-opacity group-hover:flex ${activeSong?.title === song.title ? 'flex bg-white/10 backdrop-blur-sm ' : 'hidden'}`}>
               <PlayPause
+                  className={"play-pause"}
                   isPlaying={isPlaying}
                   activeSong={activeSong}
                   song={song}
