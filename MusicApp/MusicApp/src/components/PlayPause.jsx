@@ -4,12 +4,12 @@ const PlayPause = ({isPlaying, activeSong, song, handlePlay, handlePause}) => (
 
     isPlaying && activeSong?.title === song.title ?
         ( <FaPauseCircle
-            size={50}
-            className={"text-green-700"}
+            size={40}
+            className={"text-white"}
             onClick={handlePause}/> ) :
         (<FaPlayCircle
-            size={50}
-            className={"text-green-700"}
+            size={40}
+            className={"text-white"}
             onClick={handlePlay}/>)
 
 );
