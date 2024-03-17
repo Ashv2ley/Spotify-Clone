@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode } from "swiper";
-// import { PlayPause } from './PlayPause';
 import { playPause, setActiveSong } from "../redux/features/playerSlice";
 import { useGetTopChartsQuery }  from "../redux/services/shazamApi";
 
@@ -17,10 +16,10 @@ const TopChartCard = ({song, index, isPlaying, activeSong, handlePauseClick, han
         <div className={"flex-1 flex flex-row justify-between items-center"}>
             <img src={song?.images?.coverart} alt={song?.title} className={"w-20 rounded-lg"}/>
             <div className={"flex-1 flex flex-col justify-center mx-3"}>
-                <Link to={`/songs/${song?.key}`}>
+                <Link to={`/songs/${song?.key}`} state={song}>
                     <h1 className={"text-white text-xl font-semibold"}>{song?.title}</h1>
                 </Link>
-                <Link to={`/artists${song?.artists[0].adamid}`}>
+                <Link to={`/artists/${song?.artists[0].adamid}`}>
                     <h2 className={"text-gray-400 mt-1"}>{song?.subtitle}</h2>
                 </Link>
             </div>
@@ -49,7 +48,7 @@ const TopPlay = () => {
     });
 
     const topPlays = data?.tracks.slice(0,5);
-    console.log(data)
+    // console.log(data)
 
     const handlePauseClick = () => {
         dispatch(playPause(false))
@@ -61,7 +60,7 @@ const TopPlay = () => {
     }
 
     return(
-        <div ref={divRef} className={"xl:ml-6 ml-0 xl:mb-0 mb-6 flex-1 xl:max-w-[500px] max-w-full flex flex-col"}>
+        <div ref={divRef} className={"xl:ml-6 ml-0 xl:mb-0 mb-6 flex-1 xl:max-w-[500px] max-w-full flex flex-col"} >
             <div className={"w-full flex flex-col"}>
                 <div className={"flex flex-row justify-between items-center"}>
                     <h2 className={"flex flex-row text-white font-bold text-2xl"}>Top Charts</h2>
@@ -81,20 +80,6 @@ const TopPlay = () => {
                         handlePlayClick={() => handlePlayClick(song, i)}
                     />)}
                 </div>
-
-                {/*<div className={"mt-4 flex flex-col gap-1"}>*/}
-                {/*    {topPlays?.map((song, i)=>(*/}
-                {/*        <PlayPause*/}
-                {/*            key={song.key}*/}
-                {/*            i={i}*/}
-                {/*            isPlaying={isPlaying}*/}
-                {/*            activeSong={activeSong}*/}
-                {/*            song={song}*/}
-                {/*            handlePause={handlePauseClick}*/}
-                {/*            handlePlay={() => handlePlayClick(song, i)}*/}
-                {/*        />*/}
-                {/*    ))}*/}
-                {/*</div>*/}
 
                 <div className={"w-full flex flex-col mt-8"}>
                     <div className={"flex flex-row justify-between items-center"}>

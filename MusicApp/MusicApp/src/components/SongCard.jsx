@@ -15,9 +15,9 @@ const SongCard = ({song, i, isPlaying, activeSong, data}) => {
     }
 
     return (
-      <div className={"flex flex-col w-[200px] h-[300px] p-4 bg-white/5 transition-colors duration-300 ease-in-out hover:bg-white/10 backdrop-blur-sm animate-slideup rounded-lg cursor-pointer"}>
+      <div className={"flex flex-col w-[140px] h-[240px] lg:w-[200px] lg:h-[300px] p-4 bg-white/5 transition-colors duration-300 ease-in-out hover:bg-white/10 backdrop-blur-sm animate-slideup rounded-lg cursor-pointer"}>
           <div className={"relative w-full h-56 group smooth-transition"}>
-              <div className={`absolute opacity-100 transition-opacity group-hover:opacity-100 transform scale-95 group-hover:flex ${activeSong?.title === song.title ? 'flex bg-white/10 backdrop-blur-sm ' : 'hidden'}`}>
+              <div className={`h-44 rounded-lg absolute justify-center items-center inset-0 bg-black bg-opacity-20 transition-opacity group-hover:flex ${activeSong?.title === song.title ? 'flex bg-white/10 backdrop-blur-sm ' : 'hidden'}`}>
               <PlayPause
                   className={"play-pause"}
                   isPlaying={isPlaying}

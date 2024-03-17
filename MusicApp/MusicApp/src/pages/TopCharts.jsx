@@ -1,3 +1,29 @@
-const TopCharts = () => <div>TopCharts</div>;
+import React from 'react';
+import {useSelector} from "react-redux";
+import {Error, Loader, SongCard} from "../components"
+import {useGetTopChartsQuery} from "../redux/services/shazamApi";
+
+const TopCharts = () => {
+
+    const {activeSong, isPlaying} = useSelector((state) => state.player);
+    const { data, isFetching, error } = useGetTopChartsQuery();
+
+
+    if (isFetching) return <Loader title={"Loading Songs Around You"}/>
+    if (error) return <Error/>
+
+    return(
+        <div className={"flex flex-col"}>
+            <h1 className={"font-bold text-3xl text-white text-left mt-4 mb-10"}>Discover Top Charts</h1>
+            <div className={"flex flex-wrap justify-center gap-7"}>
+                {data?.tracks?.map((song, i) => (
+                    <SongCard
+                        song={song} i={i} isPlaying={isPlaying} activeSong={activeSong} data={data}/>
+                ))
+                }
+            </div>
+        </div>
+    );
+};
 
 export default TopCharts;
